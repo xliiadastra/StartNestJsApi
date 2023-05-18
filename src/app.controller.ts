@@ -19,7 +19,7 @@ export class AppController {
     return this.appService.getHi();
   }
   @Get('/astra42')
-  sayHello(): string {
+  say42Hello(): string {
     return this.appService.getHi();
   }
 }
