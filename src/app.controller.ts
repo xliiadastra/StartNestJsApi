@@ -18,4 +18,8 @@ export class AppController {
   sayHello(): string {
     return this.appService.getHi();
   }
+  @Get('/astra42')
+  sayHello(): string {
+    return this.appService.getHi();
+  }
 }
