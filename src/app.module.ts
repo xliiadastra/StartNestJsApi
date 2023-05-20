@@ -8,3 +8,5 @@ import { MoviesService } from './movies/movies.service';
   providers: [MoviesService],
 })
 export class AppModule {}
+
+// SPA는 하나의 module, class 혹은 function이 하나의 기능은 꼭 책임져야 한다.
