@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -17,7 +19,8 @@ export class MoviesController {
     }
 
     @Get('/:id') // 이 안에 있는 id 와 Param 의 id 의 이름은 같아야 한다.
-    getOne(@Param("id") movieId: string): Movie {
+    getOne(@Param("id") movieId: number): Movie {
+        console.log(typeof movieId);
         return this.moviesService.getOne(movieId);
     /*
         ': Movie' 는 getOne() 이라는 메서드의 반환값인데 HTTP 응답에 사용되는 값이다.
@@ -28,20 +31,20 @@ export class MoviesController {
     }
 
     @Post() // 생성.
-    create(@Body() movieData) {
+    create(@Body() movieData: CreateMovieDto) { // movieData는 CreateMovieDto 라는 타입을 가진다는 의미이다.
         console.log(movieData); // 콘솔에다가 log 같이 Body(json)로 받은 movieData 매개변수에 저장된 데이터를 출력한다.
         return this.moviesService.create(movieData); // 여기서 받은 데이터를 그대로 리턴하게 되면 웹사이트에서 내가 입력된 데이터가 그대로 보여진다.
     }
 
     @Delete('/:id')
-    remove(@Param("id") movieId: string) {
+    remove(@Param("id") movieId: number) {
         return this.moviesService.deleteOne(movieId);
     }
 
     // @Put() // 모든 리소스를 업데이트한다.
 
     @Patch('/:id') // 리소스의 일부분만 업데이트한다.
-    patch(@Param("id") movieId: string, @Body() updateData) {
+    patch(@Param("id") movieId: number, @Body() updateData: UpdateMovieDto) {
         // return {
         //     updateMovie: movieId,
         //     ...updateData, // '...' 은 전개 연산자(spread operator)로, 객체를 확장하거나 배열을 병합하는데 사용된다.
