@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
@@ -17,6 +17,12 @@ export class MoviesController {
     getAll(): Movie[] {
         return this.moviesService.getAll();
     }
+
+    // @Get()
+    // getAll(@Req() req, @Res() res): Movie[] { // Express 의 객체를 가져와서 사용하는건 비추천.(notion 에 정리해놓음)
+    //     req.json();
+    //     return this.moviesService.getAll();
+    // }
 
     @Get('/:id') // 이 안에 있는 id 와 Param 의 id 의 이름은 같아야 한다.
     getOne(@Param("id") movieId: number): Movie {

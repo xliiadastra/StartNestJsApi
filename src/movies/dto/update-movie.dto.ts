@@ -24,6 +24,6 @@ import { CreateMovieDto } from './create-movie.dto';
 // }
 
 export class UpdateMovieDto extends PartialType(CreateMovieDto) {}
-/* # PartialType : 부분 유형
+/* * PartialType : 부분 유형, extend : 연장, 확장하다
     PartialType 은 위의 CreateMovieDto의 조건들을 optional 하게 만들어준다.
 */
