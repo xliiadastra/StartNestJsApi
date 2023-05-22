@@ -15,10 +15,27 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  describe('/movies', () => {
+    it('/ (GET)', () => {
+      return request(app.getHttpServer()) // getHttpServer 는 https://localhost:3000 같은 걸 입력 안해도 되게 만드는 함수?
+        .get('/')
+        .expect(200)
+        .expect('Welcome to my Movie Api');
+    });
+    it("Post", () => {
+      return request(app.getHttpServer())
+        .post("/movies")
+        .send({
+          title: "Test",
+          year: 2000,
+          genres: ["test"],
+        })
+        .expect(201);
+    });
+    it('DELETE', () => {
+      return request(app.getHttpServer())
+        .delete('/movies')
+        .expect(404);
+    });
   });
 });
